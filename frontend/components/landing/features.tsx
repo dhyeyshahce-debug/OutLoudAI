@@ -41,7 +41,7 @@ const features = [
 
 export function Features() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-medium text-primary">Why OUTLOUD</p>
         <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -49,7 +49,7 @@ export function Features() {
         </h2>
       </div>
 
-      <div className="mt-14 grid gap-4 md:grid-cols-3">
+      <div className="mt-10 sm:mt-12 grid gap-4 md:grid-cols-3">
         {features.map((f, i) => (
           <motion.div
             key={f.title}

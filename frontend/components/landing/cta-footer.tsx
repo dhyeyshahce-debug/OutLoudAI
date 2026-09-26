@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'motion/react'
 import { buttonVariants } from '@/components/ui/button'
@@ -7,9 +8,15 @@ import { Logo } from '@/components/logo'
 import { cn } from '@/lib/utils'
 
 export function CtaFooter() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
     <>
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -40,7 +47,7 @@ export function CtaFooter() {
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-6">
           <Logo />
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} OUTLOUD AI. Built for thinkers.
+            &copy; {mounted ? new Date().getFullYear() : ''} OUTLOUD AI. Built for thinkers.
           </p>
           <div className="flex items-center gap-4 text-xs text-muted-foreground">
             <Link href="/login" className="transition-colors hover:text-foreground">

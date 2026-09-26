@@ -15,7 +15,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+    <section id="how-it-works" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-medium text-primary">How it works</p>
         <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -23,7 +23,7 @@ export function HowItWorks() {
         </h2>
       </div>
 
-      <div className="mt-14 grid gap-4 md:grid-cols-2">
+      <div className="mt-10 sm:mt-12 grid gap-4 md:grid-cols-2">
         {steps.map((step, i) => (
           <motion.div
             key={step.n}

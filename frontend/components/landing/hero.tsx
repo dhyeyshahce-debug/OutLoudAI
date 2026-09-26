@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils'
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24">
+    <section className="relative overflow-hidden pt-24 pb-12 sm:pt-32 sm:pb-16">
       {/* backgrounds */}
       <div className="pointer-events-none absolute inset-0 grid-bg mask-fade-edges opacity-70" />
       <div className="pointer-events-none absolute left-1/2 top-0 -z-0 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />

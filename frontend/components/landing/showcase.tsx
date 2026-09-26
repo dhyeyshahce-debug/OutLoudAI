@@ -9,7 +9,7 @@ import { RESULT } from '@/lib/mock-data'
 
 export function Showcase() {
   return (
-    <section id="showcase" className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+    <section id="showcase" className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-medium text-primary">The product</p>
         <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -22,7 +22,7 @@ export function Showcase() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.5 }}
-        className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border bg-card shadow-2xl shadow-primary/5"
+        className="mx-auto mt-10 sm:mt-12 max-w-4xl overflow-hidden rounded-2xl border bg-card shadow-2xl shadow-primary/5"
       >
         {/* browser chrome */}
         <div className="flex items-center gap-2 border-b bg-muted/40 px-4 py-3">
