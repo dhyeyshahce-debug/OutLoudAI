@@ -257,3 +257,20 @@ export function scoreTone(score: number) {
   if (score >= 70) return 'mid'
   return 'low'
 }
+// -----------------------------------------------------------------------------
+// Backward-compatible exports
+// -----------------------------------------------------------------------------
+
+// Some existing frontend components use the lowercase `currentUser` name.
+// Keep the existing CURRENT_USER unchanged and provide an alias.
+export const currentUser = {
+  ...CURRENT_USER,
+  avatar: "/placeholder.svg",
+}
+
+// Some dashboard components use `weeklyActivity`.
+// Reuse the existing score-over-time data so the UI/data remains unchanged.
+export const weeklyActivity = SCORE_OVER_TIME.map((item) => ({
+  ...item,
+  value: item.score,
+}))
