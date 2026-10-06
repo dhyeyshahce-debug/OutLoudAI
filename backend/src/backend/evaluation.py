@@ -113,7 +113,7 @@ def save_evaluation_result(
         engine,
     )
 
-    session_uuid = uuid.UUID(session_id)
+    session_id_int = int(session_id)
 
     coaching_json: dict[str, Any] = {
         "complexity_check":
@@ -126,11 +126,11 @@ def save_evaluation_result(
     with Session(engine) as session:
 
         result = session.exec(
-            select(EvaluationResult).where(
-                EvaluationResult.session_id
-                == session_uuid
-            )
-        ).first()
+        select(EvaluationResult).where(
+        EvaluationResult.session_id
+        == session_id_int
+        )
+     ).first()
 
         passed = (
             output.complexity_check.matches
@@ -147,7 +147,7 @@ def save_evaluation_result(
         else:
 
             result = EvaluationResult(
-                session_id=session_uuid,
+                session_id=session_id_int,
                 passed_time_complexity=passed,
                 ai_coaching=coaching_json,
             )
