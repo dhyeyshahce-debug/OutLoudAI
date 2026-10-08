@@ -257,7 +257,6 @@ export function scoreTone(score: number) {
   if (score >= 70) return 'mid'
   return 'low'
 }
-
 // ─── Aliases & data for the Dashboard page ───────────────────────────
 // The dashboard imports these names; they map to / extend the core data above.
 
@@ -265,7 +264,7 @@ export const currentUser = {
   name: CURRENT_USER.fullName,
   email: CURRENT_USER.email,
   initials: CURRENT_USER.initials,
-  avatar: null as string | null,
+  avatar: "/placeholder.svg" as string | null,
 }
 
 export type Scenario = {
@@ -313,4 +312,3 @@ export const weeklyActivity = [
   { day: 'Sat', minutes: 8 },
   { day: 'Sun', minutes: 15 },
 ]
-

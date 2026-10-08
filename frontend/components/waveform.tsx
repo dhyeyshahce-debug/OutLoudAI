@@ -20,7 +20,10 @@ export function Waveform({
   const heights = useMemo(
     () =>
       Array.from({ length: bars }, (_, i) => {
-        const seed = Math.sin(i * 1.7) * 0.5 + Math.sin(i * 0.6) * 0.5
+        const seed =
+          Math.sin(i * 1.7) * 0.5 +
+          Math.sin(i * 0.6) * 0.5
+
         return 0.3 + Math.abs(seed) * 0.7
       }),
     [bars],
