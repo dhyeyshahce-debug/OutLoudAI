@@ -3,12 +3,15 @@ import { cn } from '@/lib/utils'
 export function Logo({
   className,
   showWordmark = true,
+  iconOnly,
   size = 'default',
 }: {
   className?: string
   showWordmark?: boolean
+  iconOnly?: boolean
   size?: 'sm' | 'default'
 }) {
+  const displayWordmark = iconOnly ? false : showWordmark
   const box = size === 'sm' ? 'size-7' : 'size-8'
   return (
     <span className={cn('flex items-center gap-2', className)}>
@@ -20,7 +23,7 @@ export function Logo({
       >
         <MicWave />
       </span>
-      {showWordmark && (
+      {displayWordmark && (
         <span className="text-sm font-semibold tracking-tight">
           OUTLOUD <span className="text-primary">AI</span>
         </span>

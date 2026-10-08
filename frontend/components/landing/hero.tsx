@@ -40,15 +40,15 @@ export function Hero() {
           </p>
 
           <div className="mt-7 flex items-center justify-center gap-3">
-            <Link href="/signup" className={cn(buttonVariants({ size: 'lg' }))}>
+            <Link href="/practice" className={cn(buttonVariants({ size: 'lg' }))}>
               Start Practicing
             </Link>
-            <a
-              href="#how-it-works"
+            <Link
+              href="/how-it-works"
               className={cn(buttonVariants({ size: 'lg', variant: 'outline' }))}
             >
               How it works
-            </a>
+            </Link>
           </div>
         </motion.div>
 

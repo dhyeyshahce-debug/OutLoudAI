@@ -6,16 +6,35 @@ import { useState } from 'react'
 import { AuthShell } from '@/components/auth/auth-shell'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { Field, FieldGroup, FieldLabel, FieldError } from '@/components/ui/field'
+import { supabase } from '@/lib/supabase'
 
 export default function LoginPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setError(null)
     setLoading(true)
-    setTimeout(() => router.push('/dashboard'), 700)
+
+    const formData = new FormData(e.currentTarget)
+    const email = formData.get('email') as string
+    const password = formData.get('password') as string
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (error) {
+      setError(error.message)
+      setLoading(false)
+      return
+    }
+
+    router.push('/practice')
   }
 
   return (
@@ -35,12 +54,13 @@ export default function LoginPage() {
         <FieldGroup>
           <Field>
             <FieldLabel htmlFor="email">Email</FieldLabel>
-            <Input id="email" type="email" placeholder="you@example.com" defaultValue="aarav@outloud.ai" required />
+            <Input id="email" name="email" type="email" placeholder="you@example.com" required />
           </Field>
           <Field>
             <FieldLabel htmlFor="password">Password</FieldLabel>
-            <Input id="password" type="password" placeholder="••••••••" defaultValue="password" required />
+            <Input id="password" name="password" type="password" placeholder="••••••••" required />
           </Field>
+          {error && <FieldError>{error}</FieldError>}
           <Button type="submit" size="lg" className="w-full" disabled={loading}>
             {loading ? 'Signing in…' : 'Sign In'}
           </Button>
@@ -49,3 +69,4 @@ export default function LoginPage() {
     </AuthShell>
   )
 }
+

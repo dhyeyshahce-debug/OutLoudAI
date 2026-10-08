@@ -10,15 +10,18 @@ const styles: Record<Difficulty, string> = {
 
 export function DifficultyBadge({
   difficulty,
+  level,
   className,
 }: {
-  difficulty: Difficulty
+  difficulty?: Difficulty
+  level?: Difficulty
   className?: string
 }) {
+  const d = difficulty ?? level ?? 'Medium'
   return (
     <Badge variant="outline" className={cn('gap-1.5 font-medium', className)}>
-      <span className={cn('size-1.5 rounded-full bg-current', styles[difficulty])} />
-      {difficulty}
+      <span className={cn('size-1.5 rounded-full bg-current', styles[d])} />
+      {d}
     </Badge>
   )
 }

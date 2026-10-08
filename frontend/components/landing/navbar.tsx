@@ -2,18 +2,23 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { LogOut } from 'lucide-react'
 import { Logo } from '@/components/logo'
 import { ThemeToggle } from '@/components/theme-toggle'
-import { buttonVariants } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { useAuth } from '@/components/auth/auth-context'
 import { cn } from '@/lib/utils'
 
 const links = [
-  { label: 'How it works', href: '#how-it-works' },
-  { label: 'Practice', href: '#showcase' },
+  { label: 'How it Works', href: '/how-it-works' },
+  { label: 'Practice', href: '/practice' },
 ]
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
+  const { user, signOut } = useAuth()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -38,29 +43,54 @@ export function Navbar() {
 
         <div className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
-            <a
+            <Link
               key={l.href}
               href={l.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className={cn(
+                'rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                pathname === l.href
+                  ? 'text-foreground bg-muted'
+                  : 'text-muted-foreground hover:text-foreground',
+              )}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </div>
 
         <div className="flex items-center gap-1.5">
           <ThemeToggle />
-          <Link
-            href="/login"
-            className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), 'hidden sm:inline-flex')}
-          >
-            Sign In
-          </Link>
-          <Link href="/signup" className={cn(buttonVariants({ size: 'sm' }))}>
-            Get Started
-          </Link>
+          {user ? (
+            <>
+              <span className="hidden text-xs text-muted-foreground sm:inline truncate max-w-[140px]">
+                {user.email}
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={signOut}
+                className="gap-1.5"
+              >
+                <LogOut className="size-3.5" />
+                Sign Out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), 'hidden sm:inline-flex')}
+              >
+                Sign In
+              </Link>
+              <Link href="/signup" className={cn(buttonVariants({ size: 'sm' }))}>
+                Get Started
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>
   )
 }
+

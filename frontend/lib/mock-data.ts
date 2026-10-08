@@ -257,3 +257,60 @@ export function scoreTone(score: number) {
   if (score >= 70) return 'mid'
   return 'low'
 }
+
+// ─── Aliases & data for the Dashboard page ───────────────────────────
+// The dashboard imports these names; they map to / extend the core data above.
+
+export const currentUser = {
+  name: CURRENT_USER.fullName,
+  email: CURRENT_USER.email,
+  initials: CURRENT_USER.initials,
+  avatar: null as string | null,
+}
+
+export type Scenario = {
+  id: string
+  title: string
+  description: string
+  difficulty: Difficulty
+  emoji: string
+  duration: string
+}
+
+export const scenarios: Scenario[] = PROBLEMS.map((p) => ({
+  id: p.slug,
+  title: p.title,
+  description: p.prompt.slice(0, 100) + '…',
+  difficulty: p.difficulty,
+  emoji: p.difficulty === 'Easy' ? '🟢' : p.difficulty === 'Medium' ? '🟡' : '🔴',
+  duration: p.difficulty === 'Easy' ? '3 min' : p.difficulty === 'Medium' ? '5 min' : '8 min',
+}))
+
+export type SessionHistory = {
+  id: string
+  title: string
+  difficulty: Difficulty
+  score: number
+  date: string
+  emoji: string
+}
+
+export const sessionHistory: SessionHistory[] = RECENT_SESSIONS.map((s) => ({
+  id: s.id,
+  title: s.problem,
+  difficulty: s.difficulty,
+  score: s.score,
+  date: s.date,
+  emoji: s.difficulty === 'Easy' ? '🟢' : s.difficulty === 'Medium' ? '🟡' : '🔴',
+}))
+
+export const weeklyActivity = [
+  { day: 'Mon', minutes: 18 },
+  { day: 'Tue', minutes: 25 },
+  { day: 'Wed', minutes: 12 },
+  { day: 'Thu', minutes: 30 },
+  { day: 'Fri', minutes: 22 },
+  { day: 'Sat', minutes: 8 },
+  { day: 'Sun', minutes: 15 },
+]
+
